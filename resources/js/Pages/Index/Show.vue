@@ -1,10 +1,11 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import DefaultLayout from "../../Layouts/DefaultLayout.vue";
 </script>
 
 <template>
-    <div>Show</div>
-    <Link href="/">Index Page</Link>
+    <DefaultLayout>
+        <p>Show</p>
+    </DefaultLayout>
 </template>
 
 <style scoped>
