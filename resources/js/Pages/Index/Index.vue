@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <script>
-import DefaultLayout from "../../Layouts/DefaultLayout.vue";
+import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 
 export default {
     layout: DefaultLayout
