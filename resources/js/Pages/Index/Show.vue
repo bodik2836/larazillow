@@ -1,10 +1,4 @@
-<script>
-import DefaultLayout from "@/Layouts/DefaultLayout.vue";
-
-export default {
-    layout: DefaultLayout
-}
-</script>
+<script></script>
 
 <template>
     <p>Show</p>
