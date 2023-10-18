@@ -1,14 +1,19 @@
 <script setup>
-import DefaultLayout from "../../Layouts/DefaultLayout.vue";
 defineProps({
     message: String
 })
 </script>
 
+<script>
+import DefaultLayout from "../../Layouts/DefaultLayout.vue";
+
+export default {
+    layout: DefaultLayout
+}
+</script>
+
 <template>
-    <DefaultLayout>
-        <p>Message: {{ message }}</p>
-    </DefaultLayout>
+    <p>Message: {{ message }}</p>
 </template>
 
 <style scoped>

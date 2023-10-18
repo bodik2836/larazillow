@@ -1,11 +1,13 @@
-<script setup>
+<script>
 import DefaultLayout from "../../Layouts/DefaultLayout.vue";
+
+export default {
+    layout: DefaultLayout
+}
 </script>
 
 <template>
-    <DefaultLayout>
-        <p>Show</p>
-    </DefaultLayout>
+    <p>Show</p>
 </template>
 
 <style scoped>
