@@ -11,15 +11,15 @@ defineProps({
 
 <div  v-for="listing in listings" :key="listing.id">
     <div>
-        <Link :href="`/listings/${listing.id}`">
+        <Link :href="route('listings.show', {listing: listing.id})">
             <ListingAddress :listing="listing" />
         </Link>
     </div>
     <div>
-        <Link :href="`/listings/${listing.id}/edit`">Edit</Link>
+        <Link :href="route('listings.edit', {listing: listing.id})">Edit</Link>
     </div>
     <div>
-        <Link :href="`/listings/${listing.id}`" method="DELETE" as="button">Delete</Link>
+        <Link :href="route('listings.destroy', {listing: listing.id})" method="DELETE" as="button">Delete</Link>
     </div>
 </div>
 
