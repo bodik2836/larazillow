@@ -2,6 +2,14 @@ import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import DefaultLayout from "@/Layouts/DefaultLayout.vue"
 import { ZiggyVue } from 'ziggy'
+import { InertiaProgress } from "@inertiajs/progress"
+
+InertiaProgress.init({
+    delay: 0,
+    color: '#8c33ff',
+    includeCSS: true,
+    showSpinner: true,
+})
 
 createInertiaApp({
     resolve: name => {
