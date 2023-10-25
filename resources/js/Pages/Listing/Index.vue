@@ -20,12 +20,16 @@ defineProps({
                 <ListingAddress :listing="listing" class="text-gray-500" />
             </Link>
         </div>
-        <div>
+      <div class="border-t border-gray-200 border-solid border-1 my-2"></div>
+        <div class="flex justify-between">
+          <div>
             <Link :href="route('listings.edit', {listing: listing.id})">Edit</Link>
-        </div>
-        <div>
+          </div>
+          <div>
             <Link :href="route('listings.destroy', {listing: listing.id})" method="DELETE" as="button">Delete</Link>
+          </div>
         </div>
+
     </Box>
 </div>
 </template>
