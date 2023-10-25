@@ -12,71 +12,71 @@ const form = useForm({
     price: 0,
 })
 
-const create = () => form.post(route('listing.store'))
+const create = () => form.post(route('listings.store'))
 
 </script>
 
 <template>
 <form @submit.prevent="create">
-    <div>
-        <div>
-            <label for="">Beds</label>
-            <input v-model.number="form.beds" type="text" />
+    <div class="grid grid-cols-6 gap-4">
+        <div class="col-span-2">
+            <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium" for="">Beds</label>
+            <input v-model.number="form.beds" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
             <div v-if="form.errors.beds">
                 {{ form.errors.beds }}
             </div>
         </div>
-        <div>
-            <label for="">Baths</label>
-            <input v-model.number="form.baths" type="text" />
+        <div class="col-span-2">
+            <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium" for="">Baths</label>
+            <input v-model.number="form.baths" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
             <div v-if="form.errors.baths">
                 {{ form.errors.baths }}
             </div>
         </div>
-        <div>
-            <label for="">Area</label>
-            <input v-model.number="form.area" type="text" />
+        <div class="col-span-2">
+            <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium" for="">Area</label>
+            <input v-model.number="form.area" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
             <div v-if="form.errors.area">
                 {{ form.errors.area }}
             </div>
         </div>
-        <div>
-            <label for="">City</label>
-            <input v-model="form.city" type="text" />
+        <div class="col-span-4">
+            <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium" for="">City</label>
+            <input v-model="form.city" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
             <div v-if="form.errors.city">
                 {{ form.errors.city }}
             </div>
         </div>
-        <div>
-            <label for="">Code</label>
-            <input v-model="form.code" type="text" />
+        <div class="col-span-2">
+            <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium" for="">Code</label>
+            <input v-model="form.code" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
             <div v-if="form.errors.code">
                 {{ form.errors.code }}
             </div>
         </div>
-        <div>
-            <label for="">Street</label>
-            <input v-model="form.street" type="text" />
+        <div class="col-span-4">
+            <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium" for="">Street</label>
+            <input v-model="form.street" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
             <div v-if="form.errors.street">
                 {{ form.errors.street }}
             </div>
         </div>
-        <div>
-            <label for="">Street nr</label>
-            <input v-model="form.street_nr" type="text" />
+        <div class="col-span-2">
+            <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium" for="">Street nr</label>
+            <input v-model="form.street_nr" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
             <div v-if="form.errors.street_nr">
                 {{ form.errors.street_nr }}
             </div>
         </div>
-        <div>
-            <label for="">Price</label>
-            <input v-model.number="form.price" type="text" />
+        <div class="col-span-6">
+            <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium" for="">Price</label>
+            <input v-model.number="form.price" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
             <div v-if="form.errors.price">
                 {{ form.errors.price }}
             </div>
         </div>
-        <div>
-            <button type="submit">Create</button>
+        <div class="col-span-6">
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium p-2 rounded-md">Create</button>
         </div>
     </div>
 </form>
