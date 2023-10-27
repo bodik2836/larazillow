@@ -5,6 +5,7 @@ import { computed } from "vue"
 const page = usePage()
 const flashSuccess = computed(() => page.props.flash.success)
 
+const user = computed(() => page.props.user)
 </script>
 
 <template>
@@ -17,11 +18,13 @@ const flashSuccess = computed(() => page.props.flash.success)
                 <div class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
                     <Link :href="route('listings.index')">LaraZillow</Link>
                 </div>
-                <div>
-                    <Link
-                        :href="route('listings.create')"
-                        class="btn-primary"
-                    >+ New Listing</Link>
+                <div v-if="user" class="flex items-center gap-4">
+                    <div class="text-sm text-gray-500">{{ user.name }}</div>
+                    <Link :href="route('listings.create')" class="btn-primary">+ New Listing</Link>
+                    <div>Logout</div>
+                </div>
+                <div v-else>
+                    <Link :href="route('login')">Sign-In</Link>
                 </div>
             </nav>
         </div>

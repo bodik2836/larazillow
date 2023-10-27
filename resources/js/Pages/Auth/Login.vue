@@ -15,12 +15,16 @@ const login = () => form.post(route('login.store'))
             <div>
                 <label for="email" class="label">E-mail (username)</label>
                 <input type="email" id="email" v-model="form.email" class="input" />
-                <div class="input-error">errors</div>
+                <div class="input-error" v-if="form.errors.email">
+                    {{ form.errors.email }}
+                </div>
             </div>
             <div class="mt-4">
                 <label for="email" class="label">Password</label>
                 <input type="password" id="password" v-model="form.password" class="input" />
-                <div class="input-error">errors</div>
+                <div class="input-error" v-if="form.errors.password">
+                    {{ form.errors.password }}
+                </div>
             </div>
             <div class="mt-4">
                 <button type="submit" class="btn-primary w-full">Login</button>
