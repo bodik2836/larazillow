@@ -19,8 +19,13 @@ Route::get('/', function () {
     return redirect()->route('listings.index');
 });
 
-Route::get('login', [AuthController::class, 'create'])->name('login');
-Route::post('login', [AuthController::class, 'store'])->name('login.store');
-Route::delete('login', [AuthController::class, 'destroy'])->name('logout');
+Route::group(['middleware' => ['guest']], function () {
+    Route::get('login', [AuthController::class, 'create'])->name('login');
+    Route::post('login', [AuthController::class, 'store'])->name('login.store');
+});
+
+Route::delete('logout', [AuthController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
 
 Route::resource('listings', ListingController::class);
