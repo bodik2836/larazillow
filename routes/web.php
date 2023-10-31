@@ -30,4 +30,4 @@ Route::delete('logout', [AuthController::class, 'destroy'])
     ->name('logout');
 
 Route::resource('listings', ListingController::class);
-Route::resource('user-account', UserAccountController::class)->only(['create']);
+Route::resource('user-account', UserAccountController::class)->only(['create', 'store']);
