@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('listings.index');
+    return redirect()->route('login');
 });
 
 Route::group(['middleware' => ['guest']], function () {
@@ -25,9 +25,10 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('login', [AuthController::class, 'store'])->name('login.store');
 });
 
-Route::delete('logout', [AuthController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('listings', ListingController::class);
 
-Route::resource('listings', ListingController::class);
+    Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
+});
+
 Route::resource('user-account', UserAccountController::class)->only(['create', 'store']);
