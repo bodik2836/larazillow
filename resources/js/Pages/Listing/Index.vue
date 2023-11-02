@@ -5,11 +5,12 @@ import Filters from "@/Pages/Listing/Index/Components/Filters.vue";
 
 defineProps({
     listings: Object,
+    filters: Object,
 })
 </script>
 
 <template>
-    <Filters />
+    <Filters :filters="filters" />
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         <Listing v-for="listing in listings.data" :listing="listing" :key="listing.id" />
     </div>
