@@ -18,32 +18,12 @@ class ListingController extends Controller
     public function index(Request $request)
     {
         $filters = $request->only(['priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo']);
-        $query = Listing::query()->orderByDesc('created_at')
-            ->when(
-                $filters['priceFrom'] ?? false,
-                fn($query, $value) => $query->where('price', '>=', $filters['priceFrom'])
-            )->when(
-                $filters['priceTo'] ?? false,
-                fn($query, $value) => $query->where('price', '<=', $filters['priceTo'])
-            )->when(
-                $filters['beds'] ?? false,
-                fn($query, $value) => $query->where('beds', (int)$value < 6 ? '=' : '>=', $filters['beds'])
-            )->when(
-                $filters['baths'] ?? false,
-                fn($query, $value) => $query->where('baths', (int)$value < 6 ? '=' : '>=', $filters['baths'])
-            )->when(
-                $filters['areaFrom'] ?? false,
-                fn($query, $value) => $query->where('area', '>=', $filters['areaFrom'])
-            )->when(
-                $filters['areaTo'] ?? false,
-                fn($query, $value) => $query->where('area', '<=', $filters['areaTo'])
-            );
 
         return inertia(
             'Listing/Index',
             [
                 'filters' => $filters,
-                'listings' => $query->paginate(10)->withQueryString(),
+                'listings' => Listing::query()->mostRecent()->filter($filters)->paginate(10)->withQueryString(),
             ]
         );
     }
