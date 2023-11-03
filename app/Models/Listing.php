@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,5 +16,33 @@ class Listing extends Model
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeMostRecent(Builder $query): Builder
+    {
+        return $query->orderByDesc('created_at');
+    }
+
+    public function scopeFilter(Builder $query, array $filters)
+    {
+        return $query->when(
+            $filters['priceFrom'] ?? false,
+            fn($query, $value) => $query->where('price', '>=', $filters['priceFrom'])
+        )->when(
+            $filters['priceTo'] ?? false,
+            fn($query, $value) => $query->where('price', '<=', $filters['priceTo'])
+        )->when(
+            $filters['beds'] ?? false,
+            fn($query, $value) => $query->where('beds', (int)$value < 6 ? '=' : '>=', $filters['beds'])
+        )->when(
+            $filters['baths'] ?? false,
+            fn($query, $value) => $query->where('baths', (int)$value < 6 ? '=' : '>=', $filters['baths'])
+        )->when(
+            $filters['areaFrom'] ?? false,
+            fn($query, $value) => $query->where('area', '>=', $filters['areaFrom'])
+        )->when(
+            $filters['areaTo'] ?? false,
+            fn($query, $value) => $query->where('area', '<=', $filters['areaTo'])
+        );
     }
 }
