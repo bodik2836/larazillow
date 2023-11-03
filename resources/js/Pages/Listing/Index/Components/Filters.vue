@@ -46,12 +46,12 @@ const clear = () => {
             <select v-model.number="filterForm.beds" class="input-filter-l w-22">
                 <option :value="null">Beds</option>
                 <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
-                <option>6+</option>
+                <option :value="6">6+</option>
             </select>
             <select v-model.number="filterForm.baths" class="input-filter-r w-22">
                 <option :value="null">Baths</option>
                 <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
-                <option>6+</option>
+                <option :value="6">6+</option>
             </select>
         </div>
         <div class="flex flex-nowrap items-center">
