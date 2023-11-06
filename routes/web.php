@@ -27,7 +27,7 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('listings', ListingController::class);
+    Route::resource('listings', ListingController::class)->except(['destroy']);
     Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 });
 
@@ -38,7 +38,7 @@ Route::group(
         'middleware' => 'auth'
     ],
     function () {
-        Route::resource('listings', RealtorListingController::class);
+        Route::resource('listings', RealtorListingController::class)->only(['index', 'destroy']);
     }
 );
 
