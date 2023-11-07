@@ -1,6 +1,7 @@
 <script setup>
 import {reactive, watch} from "vue";
 import {router} from "@inertiajs/vue3";
+import {debounce} from "lodash";
 
 const filterForm = reactive({
     deleted: false,
@@ -8,10 +9,10 @@ const filterForm = reactive({
 
 watch(
     filterForm,
-    () => router.get(
+    debounce(() => router.get(
         route('realtor.listings.index'),
         filterForm,
-        {preserveState: true, preserveScroll: true})
+        {preserveState: true, preserveScroll: true}), 1000),
 )
 </script>
 
