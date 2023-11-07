@@ -21,7 +21,7 @@ class RealtorListingController extends Controller
 
         return inertia('Realtor/Index', [
             'filters' => $filters,
-            'listings' => $request->user()->listings()->filter($filters)->get(),
+            'listings' => $request->user()->listings()->filter($filters)->paginate(10)->withQueryString(),
         ]);
     }
 
