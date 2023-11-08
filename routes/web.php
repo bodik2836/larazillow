@@ -40,6 +40,7 @@ Route::group(
         'middleware' => 'auth'
     ],
     function () {
-        Route::resource('listings', RealtorListingController::class)->except(['show']);
+        Route::put('listings/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listings.restore')->withTrashed();
+        Route::resource('listings', RealtorListingController::class)->except(['show'])->withTrashed();
     }
 );
