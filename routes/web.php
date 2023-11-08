@@ -21,13 +21,15 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::resource('listings', ListingController::class)->only(['index', 'show']);
+Route::resource('user-account', UserAccountController::class)->only(['create', 'store']);
+
 Route::group(['middleware' => ['guest']], function () {
     Route::get('login', [AuthController::class, 'create'])->name('login');
     Route::post('login', [AuthController::class, 'store'])->name('login.store');
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('listings', ListingController::class)->except(['destroy']);
     Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 });
 
@@ -38,8 +40,6 @@ Route::group(
         'middleware' => 'auth'
     ],
     function () {
-        Route::resource('listings', RealtorListingController::class)->only(['index', 'destroy']);
+        Route::resource('listings', RealtorListingController::class)->except(['show']);
     }
 );
-
-Route::resource('user-account', UserAccountController::class)->only(['create', 'store']);
