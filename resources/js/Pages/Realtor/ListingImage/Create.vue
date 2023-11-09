@@ -1,6 +1,6 @@
 <script setup>
 import Box from "@/Components/UI/Box.vue";
-import {useForm} from "@inertiajs/vue3";
+import {useForm, Link} from "@inertiajs/vue3";
 import {computed} from "vue";
 import {Inertia} from "@inertiajs/inertia";
 import NProgress from "nprogress";
@@ -55,8 +55,18 @@ const reset = () => form.reset('images')
 <Box v-if="listing.images.length" class="mt-4">
   <template #header>Current listing images</template>
   <section class="mt-4 grid grid-cols-3 gap-4">
-    <div v-for="image in listing.images" :key="image.id">
+    <div v-for="image in listing.images" :key="image.id"
+         class="flex flex-col justify-between"
+    >
       <img :src="image.src" class="rounded-md" />
+      <Link
+          :href="route('realtor.listings.image.destroy', {listing: props.listing.id, image: image.id})"
+          as="button"
+          method="delete"
+          class="mt-2 btn-outline text-xs"
+      >
+        Delete
+      </Link>
     </div>
   </section>
 </Box>

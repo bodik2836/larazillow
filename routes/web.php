@@ -43,6 +43,6 @@ Route::group(
     function () {
         Route::put('listings/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listings.restore')->withTrashed();
         Route::resource('listings', RealtorListingController::class)->except(['show'])->withTrashed();
-        Route::resource('listings.image', RealtorListingImageController::class)->only(['create', 'store']);
+        Route::resource('listings.image', RealtorListingImageController::class)->only(['create', 'store', 'destroy']);
     }
 );
