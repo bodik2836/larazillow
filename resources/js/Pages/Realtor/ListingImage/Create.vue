@@ -2,9 +2,17 @@
 import Box from "@/Components/UI/Box.vue";
 import {useForm} from "@inertiajs/vue3";
 import {computed} from "vue";
+import {Inertia} from "@inertiajs/inertia";
+import NProgress from "nprogress";
 
 const props = defineProps({
     listing: Object,
+})
+
+Inertia.on('progress', (e) => {
+  if (e.detail.progress.percentage) {
+    NProgress.set((e.detail.progress.percentage / 100) * 0.9)
+  }
 })
 
 const form = useForm({
@@ -43,6 +51,14 @@ const reset = () => form.reset('images')
             <button type="reset" class="btn-outline" @click="reset">Reset</button>
         </template>
     </form>
+</Box>
+<Box v-if="listing.images.length" class="mt-4">
+  <template #header>Current listing images</template>
+  <section class="mt-4 grid grid-cols-3 gap-4">
+    <div v-for="image in listing.images" :key="image.id">
+      <img :src="image.src" class="rounded-md" />
+    </div>
+  </section>
 </Box>
 </template>
 
