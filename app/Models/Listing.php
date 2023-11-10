@@ -28,7 +28,7 @@ class Listing extends Model
 
     public function offers(): HasMany
     {
-        return $this->hasMany(Listing::class);
+        return $this->hasMany(Offer::class);
     }
 
     public function scopeMostRecent(Builder $query): Builder
