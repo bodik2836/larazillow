@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('listings.index');
 });
 
 Route::resource('listings', ListingController::class)->only(['index', 'show']);
