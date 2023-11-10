@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
 use App\Http\Controllers\UserAccountController;
@@ -32,6 +33,7 @@ Route::group(['middleware' => ['guest']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
+    Route::resource('listings.offer', ListingOfferController::class)->only(['store']);
 });
 
 Route::group(
