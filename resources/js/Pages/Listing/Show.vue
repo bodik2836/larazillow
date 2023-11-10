@@ -12,10 +12,12 @@ const props = defineProps({
     listing: Object,
 })
 
+const offer = ref(props.listing.price)
+
 const interestRate = ref(2.5)
 const duration = ref(25)
 
-const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(props.listing.price, interestRate, duration)
+const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(offer, interestRate, duration)
 
 const page = usePage()
 const user = computed(() => page.props.user)
@@ -81,6 +83,7 @@ const user = computed(() => page.props.user)
             v-if="user"
             :listing-id="listing.id"
             :price="listing.price"
+            @offer-updated="offer = $event"
         />
     </div>
 </div>
