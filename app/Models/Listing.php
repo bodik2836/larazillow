@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use http\QueryString;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +35,11 @@ class Listing extends Model
     public function scopeMostRecent(Builder $query): Builder
     {
         return $query->orderByDesc('created_at');
+    }
+
+    public function scopeWithoutSold(Builder $query): Builder
+    {
+        return $query->whereNull('sold_at');
     }
 
     public function scopeFilter(Builder $query, array $filters)
