@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ListingOfferController;
+use App\Http\Controllers\RealtorListingAcceptOfferController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
 use App\Http\Controllers\UserAccountController;
@@ -46,5 +47,6 @@ Route::group(
         Route::put('listings/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listings.restore')->withTrashed();
         Route::resource('listings', RealtorListingController::class)->withTrashed();
         Route::resource('listings.image', RealtorListingImageController::class)->only(['create', 'store', 'destroy']);
+        Route::put('offer/{offer}/accept', RealtorListingAcceptOfferController::class)->name('offer.accept');
     }
 );
