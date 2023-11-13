@@ -5,6 +5,7 @@ import Price from "@/Components/Price.vue";
 import ListingSpace from "@/Components/ListingSpace.vue";
 import ListingAddress from "@/Components/ListingAddress.vue";
 import {computed} from "vue";
+import Offer from "@/Pages/Realtor/Show/Components/Offer.vue";
 
 const props = defineProps({
     listing: Object
@@ -21,7 +22,9 @@ const hasOffers = computed(() => props.listing.offers.length)
     <Box v-if="!hasOffers" class="flex md:col-span-7 items-center">
         <div class="w-full text-center font-medium text-gray-500">No offers</div>
     </Box>
-    <div v-else class="md:col-span-7 items-center">Offers</div>
+    <div v-else class="md:col-span-7 items-center">
+        <Offer v-for="offer in listing.offers" :key="offer.id" :offer="offer" :listing-price="listing.price" class="mb-4" />
+    </div>
     <Box class="md:col-span-5">
         <template #header>Basic info</template>
         <Price :price="listing.price" class="text-2x font-bold" />
