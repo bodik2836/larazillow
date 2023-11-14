@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NotificationSeenController;
 use App\Http\Controllers\RealtorListingAcceptOfferController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
@@ -37,6 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
     Route::resource('listings.offer', ListingOfferController::class)->only(['store']);
     Route::resource('notifications', NotificationController::class)->only(['index']);
+    Route::put('notifications/{notification}/seen', NotificationSeenController::class)->name('notifications.seen');
 });
 
 Route::group(
