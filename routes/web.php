@@ -39,13 +39,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('listings.offer', ListingOfferController::class)->only(['store']);
     Route::resource('notifications', NotificationController::class)->only(['index']);
     Route::put('notifications/{notification}/seen', NotificationSeenController::class)->name('notifications.seen');
+
+    Route::get('/email/verify', function () {
+        return inertia('Auth/VerifyEmail');
+    })->name('verification.notice');
 });
 
 Route::group(
     [
         'prefix' => 'realtor',
         'as' => 'realtor.',
-        'middleware' => 'auth'
+        'middleware' => ['auth', 'verified']
     ],
     function () {
         Route::put('listings/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listings.restore')->withTrashed();
