@@ -9,6 +9,7 @@ use App\Http\Controllers\RealtorListingAcceptOfferController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
 use App\Http\Controllers\UserAccountController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,9 +41,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('notifications', NotificationController::class)->only(['index']);
     Route::put('notifications/{notification}/seen', NotificationSeenController::class)->name('notifications.seen');
 
+    // Email verification
     Route::get('/email/verify', function () {
         return inertia('Auth/VerifyEmail');
     })->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+
+        return redirect()->route('listings.index')->with('success', 'Email was verified.');
+    })->middleware('signed')->name('verification.verify');
 });
 
 Route::group(
