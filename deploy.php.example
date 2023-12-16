@@ -1,0 +1,25 @@
+<?php
+namespace Deployer;
+
+require 'recipe/laravel.php';
+
+// Config
+set('repository', 'some_repo');
+set('writable_mode', 'chown');
+
+add('shared_files', []);
+add('shared_dirs', []);
+add('writable_dirs', []);
+
+// Hosts
+
+host('some_host')
+    ->set('remote_user', 'some_user')
+    ->set('http_user', 'some_user')
+    ->set('deploy_path', 'some_path');
+
+set('keep_releases', 3);
+
+// Hooks
+
+after('deploy:failed', 'deploy:unlock');
