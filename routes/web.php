@@ -64,7 +64,7 @@ Route::group(
     [
         'prefix' => 'realtor',
         'as' => 'realtor.',
-        'middleware' => ['auth', 'verified']
+        'middleware' => ['auth']
     ],
     function () {
         Route::put('listings/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listings.restore')->withTrashed();
