@@ -6,6 +6,11 @@ const form = useForm({
     password: null,
 })
 
+const fillTestCred = () => {
+    form.email = "test@mail.loc"
+    form.password = "password"
+}
+
 const login = () => form.post(route('login.store'))
 </script>
 
@@ -32,6 +37,9 @@ const login = () => form.post(route('login.store'))
                     <Link :href="route('user-account.create')" class="text-sm text-gray-500">
                         Need an account? Click here.
                     </Link>
+                    <p @click="fillTestCred" class="mt-2 text-sm text-gray-500 cursor-pointer">
+                        Or you can use test account. Click here.
+                    </p>
                 </div>
             </div>
         </div>
