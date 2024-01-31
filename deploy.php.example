@@ -3,6 +3,19 @@ namespace Deployer;
 
 require 'recipe/laravel.php';
 
+desc('NPM install');
+task('npm:install', function () {
+    cd('{{deploy_path}}/current');
+    run('npm install');
+});
+
+desc('NPM build');
+task('npm:build', function () {
+    cd('{{deploy_path}}/current');
+    run('npm run build');
+});
+
+
 // Config
 set('repository', 'some_repo');
 set('writable_mode', 'chown');
@@ -19,6 +32,9 @@ host('some_host')
     ->set('deploy_path', 'some_path');
 
 set('keep_releases', 3);
+
+after('deploy', 'npm:install');
+after('npm:install', 'npm:build');
 
 // Hooks
 
